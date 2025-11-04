@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Presupuesto Inicial — Sistema de Control de Acceso Digital</title>
+  <meta name="description" content="Presupuesto inicial del proyecto de control de acceso digital con Raspberry Pi.">
+  <style>
+    /* Animación sutil para las tarjetas */
+    .card {
+      transition: box-shadow 0.3s, transform 0.3s;
+    }
+    .card:hover {
+      box-shadow: 0 8px 32px rgba(35,41,70,0.18);
+      transform: translateY(-4px) scale(1.015);
+    }
+    /* Enlaces de navegación elegantes y minimalistas */
+    nav a {
+      color: #8ecae6;
+      background: none;
+      border: none;
+      margin: 0 16px;
+      padding: 0 0 4px 0;
+      font-weight: 600;
+      font-size: 1.08rem;
+      letter-spacing: 0.5px;
+      text-decoration: none;
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s, border-bottom 0.2s;
+      position: relative;
+    }
+    nav a::after {
+      content: '';
+      display: block;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, #8ecae6 60%, #232946 100%);
+      border-radius: 2px;
+      transform: scaleX(0);
+      transition: transform 0.3s;
+    }
+    nav a:hover {
+      color: #232946;
+      border-bottom: 2px solid #8ecae6;
+    }
+    nav a:hover::after {
+      transform: scaleX(1);
+    }
+    /* Títulos con subrayado animado */
+    h2, h3 {
+      position: relative;
+      display: inline-block;
+      padding-bottom: 4px;
+    }
+    h2::after, h3::after {
+      content: '';
+      display: block;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, #8ecae6 60%, #232946 100%);
+      border-radius: 2px;
+      transform: scaleX(0);
+      transition: transform 0.3s;
+    }
+    h2:hover::after, h3:hover::after {
+      transform: scaleX(1);
+    }
+    /* Mejoras en imágenes */
+    img {
+      transition: box-shadow 0.3s, transform 0.3s;
+    }
+    img:hover {
+      box-shadow: 0 8px 32px rgba(35,41,70,0.18);
+      transform: scale(1.03);
+    }
+    /* Espaciado extra en la página */
+    .container {
+      margin-bottom: 48px;
+    }
+    /* Footer más elegante */
+    footer {
+      letter-spacing: 1px;
+      font-size: 1.05rem;
+      border-radius: 0 0 18px 18px;
+      box-shadow: 0 -4px 24px rgba(35,41,70,0.10);
+    }
+    body {
+      font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #fff;
+      color: #232946;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+    header {
+      background: #232946;
+      color: #e0e6ed;
+      padding: 32px 20px 24px 20px;
+      text-align: center;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+      border-bottom: 2px solid #8ecae6;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.2rem;
+      letter-spacing: 1px;
+      font-weight: 700;
+      text-shadow: 0 2px 8px #1a1a2e44;
+    }
+    nav {
+      margin-top: 18px;
+    }
+    nav a {
+      color: #e0e6ed;
+      margin: 0 18px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.08rem;
+      letter-spacing: 0.5px;
+      transition: color 0.2s;
+      border-bottom: 2px solid transparent;
+      padding-bottom: 2px;
+    }
+    nav a:hover {
+      color: #8ecae6;
+      border-bottom: 2px solid #8ecae6;
+    }
+    .container {
+      max-width: 900px;
+      margin: 32px auto;
+      padding: 32px 24px;
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 4px 32px rgba(35,41,70,0.08);
+      text-align: center;
+      border: 1.5px solid #e0e6ed;
+    }
+    h2 {
+      color: #232946;
+      margin-top: 0;
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-align: center;
+      border-bottom: 2px solid #8ecae6;
+      display: inline-block;
+      padding-bottom: 4px;
+      margin-bottom: 18px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      background: #f4f7fa;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(35,41,70,0.07);
+      transition: transform 0.35s cubic-bezier(.4,1.4,.6,1), box-shadow 0.3s;
+    }
+    table:hover {
+      transform: scale(1.06);
+      box-shadow: 0 8px 32px rgba(35,41,70,0.18);
+    }
+    th, td {
+      border: 1px solid #e0e6ed;
+      padding: 12px 10px;
+      text-align: left;
+      font-size: 1rem;
+    }
+    th {
+      background: #232946;
+      color: #e0e6ed;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    tr:nth-child(even) {
+      background: #f9fafb;
+    }
+    .total {
+      font-weight: bold;
+      background: #8ecae6;
+      color: #fff;
+      font-size: 1.08rem;
+    }
+    img {
+      max-width: 90%;
+      border-radius: 10px;
+      margin: 18px 0 8px 0;
+      box-shadow: 0 2px 12px rgba(35,41,70,0.10);
+      border: 1px solid #e0e6ed;
+    }
+    footer {
+      text-align: center;
+      padding: 18px;
+      background: #232946;
+      color: #e0e6ed;
+      margin-top: 32px;
+      font-size: 1rem;
+      letter-spacing: 0.5px;
+      border-top: 2px solid #8ecae6;
+      box-shadow: 0 -2px 12px rgba(35,41,70,0.10);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Presupuesto Inicial</h1>
+    <nav>
+      <a href="principal.html">Inicio</a>
+      <a href="explicacion.html">Explicación</a>
+      <a href="monitoreo.html">Monitoreo</a>
+      <a href="softwares.html">softwares</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h2>Componentes y costos estimados</h2>
+    <p>El siguiente presupuesto corresponde a la inversión inicial necesaria para implementar el <strong>Sistema de Control de Acceso Digital</strong>. Los precios son aproximados y pueden variar según el proveedor.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Componente</th>
+          <th>Descripción</th>
+          <th>Costo (€)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Raspberry Pi 4 (4GB RAM)</td>
+          <td>Unidad central de gestión</td>
+          <td>70</td>
+        </tr>
+        <tr>
+          <td>Fuente de alimentación y carcasa</td>
+          <td>Protección y alimentación de la Raspberry</td>
+          <td>20</td>
+        </tr>
+        <tr>
+          <td>Tarjeta microSD (32GB)</td>
+          <td>Almacenamiento del sistema operativo y software</td>
+          <td>12</td>
+        </tr>
+        <tr>
+          <td>Material de cableado y accesorios</td>
+          <td>Conectividad y montaje</td>
+          <td>15</td>
+        </tr>
+        <tr class="total">
+          <td colspan="2">Total estimado</td>
+          <td>157 €</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Consideraciones adicionales</h2>
+    <p>El presupuesto cubre los elementos básicos para la implementación. Dependiendo de las necesidades de la empresa, se podrían incluir:</p>
+    <ul>
+      <li>Servidor adicional para respaldo de datos.</li>
+      <li>Batería o sistema UPS para evitar caídas de energía.</li>
+      <li>Integración con cámaras de seguridad.</li>
+    </ul>
+
+    <img src="presupuestooooo.jpg" alt="Imagen ilustrativa del presupuesto y materiales">
+  </div>
+
+  <footer>
+    © 2025 Proyecto Intermodular — Chitech · Huelva | Alumno: Mario García Calero | 2ºSMR
+</body>
+</html>

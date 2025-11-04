@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Software y Arquitectura - Proyecto de Monitoreo</title>
+  <meta name="description" content="Explicación detallada del software y la arquitectura del sistema de monitoreo de red para Chitech.">
+  <style>
+    /* Estilos generales y animaciones (Copiados de tu plantilla) */
+    body {
+      font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f8f9fa; /* Un fondo ligeramente más suave */
+      color: #232946;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+    header {
+      background: #232946;
+      color: #e0e6ed;
+      padding: 32px 20px 24px 20px;
+      text-align: center;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+      border-bottom: 3px solid #8ecae6;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.2rem;
+      letter-spacing: 1px;
+      font-weight: 700;
+      text-shadow: 0 2px 8px #1a1a2e44;
+    }
+    nav {
+      margin-top: 18px;
+    }
+    nav a {
+      color: #e0e6ed;
+      margin: 0 18px;
+      padding: 0 0 4px 0;
+      font-weight: 600;
+      font-size: 1.08rem;
+      letter-spacing: 0.5px;
+      text-decoration: none;
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s, border-bottom 0.2s;
+      position: relative;
+    }
+    nav a:hover {
+      color: #8ecae6;
+    }
+    nav a::after {
+      content: '';
+      display: block;
+      position: absolute;
+      left: 0;
+      bottom: -2px;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, #8ecae6 60%, #219ebc 100%);
+      border-radius: 2px;
+      transform-origin: left;
+      transform: scaleX(0);
+      transition: transform 0.3s ease-in-out;
+    }
+    nav a:hover::after {
+      transform: scaleX(1);
+    }
+    .container {
+      max-width: 900px;
+      margin: 48px auto;
+      padding: 32px 24px;
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 4px 32px rgba(35,41,70,0.08);
+      text-align: center;
+      border: 1.5px solid #e0e6ed;
+    }
+    h3{
+      color: #232946;
+      margin-top: 0;
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-align: center;
+      border-bottom: 2px solid #8ecae6;
+      display: inline-block;
+      padding-bottom: 4px;
+      margin-bottom: 18px;
+    }
+    h2 {
+      color: #232946;
+      margin-top: 0;
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-align: center;
+      border-bottom: 2px solid #8ecae6;
+      display: inline-block;
+      padding-bottom: 4px;
+      margin-bottom: 18px;
+    }
+    h2, h3 {
+      position: relative;
+      display: inline-block;
+      padding-bottom: 4px;
+    }
+    h2::after, h3::after {
+      content: '';
+      display: block;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, #8ecae6 60%, #232946 100%);
+      border-radius: 2px;
+      transform: scaleX(0);
+      transition: transform 0.3s;
+    }
+    h2:hover::after, h3:hover::after {
+      transform: scaleX(1);
+    }
+    .card {
+      background: #f4f7fa;
+      padding: 24px 20px;
+      margin: 24px 0;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(35,41,70,0.07);
+      text-align: left; /* Alineamos el texto a la izquierda para mejor lectura */
+      border: 1px solid #dbeafe;
+      transition: box-shadow 0.3s, transform 0.3s;
+    }
+    .card:hover {
+      box-shadow: 0 8px 32px rgba(35,41,70,0.18);
+      transform: translateY(-4px) scale(1.015);
+    }
+  .card h3 {
+    text-align: left;
+  }
+  .card h3.centered {
+    text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+    .card ul, .card ol {
+      padding-left: 20px;
+      color: #232946;
+    }
+    .card p, .card li {
+        text-align: justify;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      margin: 18px 0 8px 0;
+      box-shadow: 0 2px 12px rgba(35,41,70,0.10);
+      border: 1px solid #e0e6ed;
+      transition: transform 0.3s;
+    }
+    img:hover {
+        transform: scale(1.03);
+    }
+    .logo-img {
+        max-width: 250px; /* Tamaño específico para logos */
+        display: block;
+        margin: 18px auto;
+    }
+    footer {
+      text-align: center;
+      padding: 22px;
+      background: #232946;
+      color: #e0e6ed;
+      margin-top: 48px;
+      font-size: 1rem;
+      letter-spacing: 0.5px;
+      border-top: 3px solid #8ecae6;
+    }
+    /* Estilos para la sección central de componentes */
+    .center-services {
+      max-width: 980px;
+      margin: 28px auto;
+      padding: 24px 20px;
+      text-align: center;
+    }
+    .services-card {
+      background: linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
+      border-radius: 14px;
+      padding: 18px;
+      box-shadow: 0 8px 28px rgba(35,41,70,0.06);
+      border: 1px solid #eef6ff;
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 12px;
+      align-items: start;
+    }
+    .service {
+      background: #f4f8ff;
+      padding: 12px 10px;
+      border-radius: 10px;
+      border: 1px solid #e6f1ff;
+      text-align: center;
+      min-height: 140px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      transition: transform 0.18s, box-shadow 0.18s;
+    }
+    .service:hover { transform: translateY(-6px); box-shadow: 0 12px 36px rgba(35,41,70,0.08); }
+    .service-icon { font-size: 32px; margin-bottom: 8px; }
+    .service h3 { margin: 6px 0 8px 0; font-size: 1.05rem; }
+    .service p { margin: 0; font-size: 0.95rem; color: #334; }
+    @media (max-width: 820px) { .services-grid { grid-template-columns: 1fr; } .service { min-height: auto; } }
+    .center-img { display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Explicación de softwares</h1>
+    <nav>
+      <a href="principal.html">Inicio</a>
+      <a href="explicacion.html">Explicación</a>
+      <a href="presupuesto.html">Presupuesto</a>
+      <a href="monitoreo.html">Monitoreo</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h2>Software y Arquitectura de la Solución</h2>
+    <p style="text-align: center; max-width: 80%; margin: 0 auto 32px auto;">
+      Para este proyecto se ha elegido una arquitectura moderna y robusta, basada en herramientas líderes de software libre. El ecosistema <strong>Prometheus + Grafana</strong> ofrece una potencia y flexibilidad excepcionales para la monitorización en tiempo real.
+    </p>
+
+      <!-- Sección centrada: resumen visual de Prometheus, Node Exporter, Grafana -->
+      <section class="center-services" aria-label="Componentes de monitoreo">
+        <div class="services-card">
+          <h2>Arquitectura de Monitoreo</h2>
+          <p style="margin-top:6px; margin-bottom:18px; color:#444; max-width:760px; margin-left:auto; margin-right:auto;">Componentes principales del sistema de monitoreo.</p>
+          <div class="services-grid">
+            <div class="service" role="article" aria-labelledby="prom-id">
+              <div class="service-icon" aria-hidden="true">📦</div>
+              <h3 id="prom-id">Prometheus</h3>
+              <p><strong>El Motor de Recolección</strong><br>Recopila métricas, guarda series temporales y permite consultas flexibles.</p>
+            </div>
+            <div class="service" role="article" aria-labelledby="node-id">
+              <div class="service-icon" aria-hidden="true">🛰️</div>
+              <h3 id="node-id">Node Exporter</h3>
+              <p><strong>Los Agentes de Información</strong><br>Exponen métricas de servidores y dispositivos para que Prometheus las recoja.</p>
+            </div>
+            <div class="service" role="article" aria-labelledby="graf-id">
+              <div class="service-icon" aria-hidden="true">📊</div>
+              <h3 id="graf-id">Grafana</h3>
+              <p><strong>El Panel de Control Visual</strong><br>Construye paneles, visualiza métricas y crea alertas basadas en los datos recopilados.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    <div class="card">
+      <h3 class="centered">Prometheus: El Motor de Recolección</h3>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Prometheus_software_logo.svg/512px-Prometheus_software_logo.svg.png" alt="Logo de Prometheus" class="logo-img">
+      <p>
+        <strong>¿Qué es?</strong> Prometheus es una base de datos de series temporales y un sistema de monitoreo de código abierto. Su función principal es recolectar métricas de diferentes servicios y sistemas a intervalos regulares. Es el cerebro de nuestra operación, encargado de almacenar toda la información de rendimiento.
+      </p>
+      <p>
+        <strong>¿Cómo funciona?</strong> Su característica clave es su modelo <em>pull</em>. En lugar de esperar a que los sistemas le envíen datos, Prometheus contacta activamente a los equipos que debe monitorizar (los <em>targets</em>) y extrae la información. Esto simplifica enormemente la configuración y centraliza el control.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3 class="centered">Node Exporter: Los Agentes de Información</h3>
+      <img src="Gemini_Generated_Image_imdy6imdy6imdy6i-removebg-preview.png" alt="Icono de un servidor con métricas" class="logo-img">
+      <p>
+        <strong>¿Qué es?</strong> Para que Prometheus pueda obtener datos (uso de CPU, memoria, red...), el sistema a vigilar necesita "exponerlos". <code>Node Exporter</code> es un pequeño agente que se instala en las máquinas y cuya única función es esa: recopilar las métricas del sistema y presentarlas en una URL para que Prometheus venga a por ellas. Son nuestros "chivatos" en la red.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3 class="centered">Grafana: El Panel de Control Visual</h3>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Grafana_logo.svg/512px-Grafana_logo.svg.png" alt="Logo de Grafana" class="logo-img">
+      <p>
+        <strong>¿Qué es?</strong> Si Prometheus es el motor, Grafana es el salpicadero. Es la herramienta de visualización por excelencia. Permite crear paneles de control (<em>dashboards</em>) interactivos y muy vistosos a partir de los datos que almacena Prometheus.
+      </p>
+      <p>
+        <strong>¿Cómo se usará?</strong> A través de su interfaz web, diseñaremos paneles personalizados para Chitech donde se mostrarán gráficos, medidores y alertas en tiempo real. Podremos ver el estado general de la red, el uso de ancho de banda y la carga de los servidores de un solo vistazo.
+      </p>
+    </div>
+
+    <h2>Flujo de Trabajo: ¿Cómo Funciona Todo Junto?</h2>
+    <div class="card">
+        <p>El proceso completo del sistema de monitoreo sigue un ciclo continuo, lógico y eficiente:</p>
+        <ol>
+            <li><strong>Exposición:</strong> Los agentes <code>Node Exporter</code> se ejecutan en los dispositivos de la red, exponiendo las métricas de rendimiento en una dirección web.</li>
+            <li><strong>Recolección (Scraping):</strong> La instancia de Prometheus, corriendo en la Raspberry Pi, consulta periódicamente a cada uno de estos agentes para recoger los datos actualizados.</li>
+            <li><strong>Almacenamiento:</strong> Prometheus guarda las métricas en su base de datos de series temporales, añadiendo una marca de tiempo a cada valor para poder consultar el histórico.</li>
+            <li><strong>Visualización y Alertas:</strong> El personal de Chitech accede desde un navegador a los paneles de Grafana, que consulta los datos de Prometheus y los representa en gráficos fáciles de entender.</li>
+        </ol>
+  <img src="diagrama.png" alt="Diagrama de flujo de la arquitectura: Exporter -> Prometheus -> Grafana -> Usuario" class="center-img">
+    </div>
+
+  </div>
+
+  <footer>
+    © 2025 Proyecto Final — Chitech · Huelva | Alumno: Mario García Calero | 2º SMR
+  </footer>
+
+</body>
+</html>
