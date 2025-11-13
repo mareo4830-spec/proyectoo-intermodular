@@ -4,10 +4,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Explicación del Proyecto — Sistema de Control de Acceso Digital</title>
-  <meta name="description" content="Explicación detallada del proyecto final: Sistema de Control de Acceso Digital.">
+  <title>Explicación del Proyecto — Monitoreo de Redes y Servicios</title>
+  <meta name="description" content="Explicación detallada del proyecto final: Sistema de Monitoreo de Infraestructura de Red.">
   <style>
-    /* Animación sutil para las tarjetas */
+    /* Estilos copiados de tu plantilla */
     .card {
       transition: box-shadow 0.3s, transform 0.3s;
     }
@@ -15,7 +15,6 @@
       box-shadow: 0 8px 32px rgba(35,41,70,0.18);
       transform: translateY(-4px) scale(1.015);
     }
-    /* Enlaces de navegación elegantes y minimalistas */
     nav a {
       color: #8ecae6;
       background: none;
@@ -50,7 +49,6 @@
     nav a:hover::after {
       transform: scaleX(1);
     }
-    /* Títulos con subrayado animado */
     h2, h3 {
       position: relative;
       display: inline-block;
@@ -72,7 +70,6 @@
     h2:hover::after, h3:hover::after {
       transform: scaleX(1);
     }
-    /* Mejoras en imágenes */
     .card img {
       transition: box-shadow 0.3s, transform 0.3s;
     }
@@ -80,11 +77,9 @@
       box-shadow: 0 8px 32px rgba(35,41,70,0.18);
       transform: scale(1.03);
     }
-    /* Espaciado extra en la página */
     .container {
       margin-bottom: 48px;
     }
-    /* Footer más elegante */
     footer {
       letter-spacing: 1px;
       font-size: 1.05rem;
@@ -205,22 +200,17 @@
   <div class="container">
     <h2>¿En qué consiste el proyecto?</h2>
     <div class="card">
-      <p>El proyecto tiene como objetivo implementar un <strong>Sistema de Control de Acceso Digital</strong> en una oficina, empleando una <strong>Raspberry Pi 4</strong> como unidad central de gestión. Este sistema permitirá administrar de manera segura el ingreso y salida de personal mediante <strong>tarjetas RFID o códigos digitales</strong>.</p>
-      <p>Además, el sistema estará conectado a la red de la empresa y contará con un <strong>panel de administración</strong> accesible vía web. Desde ese panel será posible:</p>
-      <ul>
-        <li>Registrar y eliminar usuarios autorizados.</li>
-        <li>Consultar el historial de accesos.</li>
-        <li>Configurar diferentes niveles de permisos.</li>
-      </ul>
+      <p>El proyecto consiste en el diseño e implementación de una solución robusta de <strong>Monitoreo de Infraestructura y Servicios</strong> para Chitech, utilizando una <strong>Raspberry Pi 4</strong> como servidor central.</p>
+      <p>El objetivo es supervisar el rendimiento de la red (<strong>latencia, ancho de banda</strong>) y el estado de los equipos críticos (<strong>CPU, RAM</strong>) en tiempo real, con capacidad de generar <strong>alertas preventivas</strong> ante fallos. Esto se logra mediante un stack de contenedores Docker (Prometheus y Grafana) y diversos *exporters* de red.</p>
       <img src="monitoreo.webp" alt="Diagrama conceptual del proyecto">
     </div>
 
     <h2>Objetivos principales</h2>
     <div class="card">
       <ul>
-        <li>Aumentar la seguridad en la oficina controlando quién accede a las instalaciones.</li>
-        <li>Utilizar software libre y hardware de bajo costo para facilitar la replicación del sistema.</li>
-        <li>Generar un sistema escalable, adaptable a diferentes entornos empresariales.</li>
+        <li>Generar **alertas automáticas** para reducir los tiempos de respuesta ante incidentes.</li>
+        <li>Obtener **datos históricos** (Prometheus) para la optimización de recursos y planificación de capacidad.</li>
+        <li>Monitorizar el **ancho de banda por dispositivo** (mediante SNMP Exporter) para identificar cuellos de botella en la red de Chitech.</li>
         <li>Desarrollar documentación técnica y manuales de uso para garantizar el mantenimiento a largo plazo.</li>
       </ul>
       <img src="seguridad.webp" alt="Imagen ilustrativa de seguridad y accesos">
@@ -228,14 +218,14 @@
 
     <h2>Metodología</h2>
     <div class="card">
-      <p>La metodología se basa en fases sucesivas:</p>
+      <p>El proyecto se gestiona bajo la metodología **Agile**, organizando el trabajo en **Sprints** (Semanas). Esto permite la **adaptación continua** ante los imprevistos de la red de Chitech y la **entrega de valor rápida** a través de iteraciones.</p>
       <ol>
-        <li><strong>Análisis:</strong> Identificación de requisitos y definición del hardware/software necesario.</li>
-        <li><strong>Diseño:</strong> Elaboración de diagramas de red y arquitectura del sistema.</li>
-        <li><strong>Implementación:</strong> Configuración de Raspberry Pi, instalación de paquetes y desarrollo del software.</li>
-        <li><strong>Pruebas:</strong> Validación del sistema en escenarios reales y ajuste de parámetros.</li>
-        <li><strong>Documentación y entrega:</strong> Elaboración del informe final y presentación del proyecto.</li>
+        <li><strong>Análisis (Sprint 1):</strong> Identificación de requisitos y definición del hardware/software necesario.</li>
+        <li><strong>Diseño e Implementación Base (Sprint 2-3):</strong> Configuración de Raspberry Pi, instalación de Docker/Docker Compose y despliegue del *stack* base de monitoreo desde GitHub.</li>
+        <li><strong>Configuración Avanzada (Sprint 4-5):</strong> Depuración de fallos de red, configuración de **SNMP Exporter** para tráfico individual y programación de **alertas**.</li>
+        <li><strong>Pruebas y Documentación (Sprint 6-7):</strong> Validación del sistema en escenarios reales, elaboración del informe final y manuales.</li>
       </ol>
+      <p>El seguimiento se realiza mediante el tablero **Trello** (Kanban).</p>
     </div>
   </div>
 

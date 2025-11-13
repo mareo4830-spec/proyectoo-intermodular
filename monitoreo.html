@@ -4,10 +4,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Monitoreo del Sistema — Proyecto de Control de Acceso</title>
-  <meta name="description" content="Información sobre el monitoreo del sistema de control de acceso digital.">
+  <title>Monitoreo del Sistema — Proyecto de Monitoreo de Redes</title>
+  <meta name="description" content="Información sobre el monitoreo del sistema de red con Prometheus y Grafana.">
   <style>
-    /* Animación sutil para las tarjetas */
+    /* Estilos copiados de tu plantilla */
     .card {
       transition: box-shadow 0.3s, transform 0.3s;
     }
@@ -15,7 +15,6 @@
       box-shadow: 0 8px 32px rgba(35,41,70,0.18);
       transform: translateY(-4px) scale(1.015);
     }
-    /* Enlaces de navegación elegantes y minimalistas */
     nav a {
       color: #8ecae6;
       background: none;
@@ -50,7 +49,6 @@
     nav a:hover::after {
       transform: scaleX(1);
     }
-    /* Títulos con subrayado animado */
     h2, h3 {
       position: relative;
       display: inline-block;
@@ -72,7 +70,6 @@
     h2:hover::after, h3:hover::after {
       transform: scaleX(1);
     }
-    /* Mejoras en imágenes */
     .card img {
       transition: box-shadow 0.3s, transform 0.3s;
     }
@@ -80,11 +77,9 @@
       box-shadow: 0 8px 32px rgba(35,41,70,0.18);
       transform: scale(1.03);
     }
-    /* Espaciado extra en la página */
     .container {
       margin-bottom: 48px;
     }
-    /* Footer más elegante */
     footer {
       letter-spacing: 1px;
       font-size: 1.05rem;
@@ -206,37 +201,37 @@
   <div class="container">
     <h2>Objetivo del monitoreo</h2>
     <div class="card">
-      <p>El monitoreo es una parte esencial del proyecto, ya que permite <strong>controlar el estado del sistema y la seguridad de los accesos en tiempo real</strong>. Esto garantiza que los responsables puedan reaccionar rápidamente ante cualquier incidencia.</p>
+      <p>El objetivo principal es la <strong>Supervisión Continua</strong> de la infraestructura de red de Chitech. Esto permite a los responsables reaccionar ante fallos y optimizar el rendimiento de la red y los servidores.</p>
       <img src="raspbeery.webp" alt="Panel de monitoreo en Raspberry Pi">
     </div>
 
     <h2>Qué se monitorea</h2>
     <div class="card">
       <ul>
-        <li><strong>Accesos autorizados:</strong> registro de usuarios válidos que ingresan al sistema.</li>
-        <li><strong>Intentos no autorizados:</strong> detección de accesos fallidos.</li>
-        <li><strong>Estado de la Raspberry Pi:</strong> CPU, memoria, temperatura y uso de red.</li>
-        <li><strong>Historial de actividad:</strong> generación de reportes semanales/mensuales.</li>
+        <li>**Salud del Servidor (RPi):** CPU, memoria, temperatura y *uptime* (via Node Exporter).</li>
+        <li>**Monitoreo Externo:** Latencia (ping) y velocidad de conexión a Internet (mediante Speedtest Exporter).</li>
+        <li>**Alerta de Caída:** Generación de alertas automáticas si la conexión a Internet o un servicio crítico falla.</li>
+        <li>**⚠️ Nuevo Objetivo (Sprint 5):** **Tráfico de Red por Dispositivo:** Ancho de banda (descarga/subida) y consumo individual, recogido mediante **SNMP Exporter** del router de Chitech.</li>
       </ul>
     </div>
 
     <h2>Herramientas utilizadas</h2>
     <div class="card">
-      <p>Para llevar a cabo el monitoreo se utilizarán herramientas de software libre, compatibles con Raspberry Pi 4, como:</p>
+      <p>Para llevar a cabo el monitoreo se utiliza el *stack* de contenedores Docker, basado en herramientas líderes de software libre:</p>
       <ul>
-        <li><strong>Grafana:</strong> visualización de métricas en paneles interactivos.</li>
-        <li><strong>Prometheus:</strong> monitoreo de red y dispositivos conectados.</li>
-        <li><strong>Sistema de velocidad de red:</strong> informes a tiempo real de la velocidad de la red.</li>
+        <li>**Grafana:** **Visualización** de métricas en paneles interactivos (Dashboard).</li>
+        <li>**Prometheus:** **Motor de recolección**, almacenamiento y motor de **alertas**.</li>
+        <li>**SNMP Exporter:** Agente clave para obtener **ancho de banda y tráfico individual** de los puertos del router.</li>
       </ul>
     </div>
 
     <h2>Beneficios</h2>
     <div class="card">
       <ul>
-        <li>Mayor seguridad gracias al seguimiento constante.</li>
-        <li>Reducción de tiempos de respuesta ante incidentes.</li>
-        <li>Historial completo para auditorías y reportes.</li>
-        <li>Escalabilidad para integrar nuevos dispositivos en el futuro.</li>
+        <li>**Detección Proactiva:** Las alertas evitan caídas prolongadas del servicio de red.</li>
+        <li>**Visibilidad:** Paneles en tiempo real del uso de CPU, RAM y latencia.</li>
+        <li>**Identificación de Cuellos de Botella:** Medición del consumo individual de ancho de banda.</li>
+        <li>**Escalabilidad:** Fácil integración de nuevos dispositivos o servidores en el futuro.</li>
       </ul>
     </div>
   </div>
