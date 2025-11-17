@@ -7,202 +7,56 @@
   <title>Presupuesto Inicial — Sistema de Monitoreo de Redes</title>
   <meta name="description" content="Presupuesto inicial del proyecto de monitoreo de red con Raspberry Pi.">
   <style>
-    /* Estilos copiados de tu plantilla */
-    .card {
-      transition: box-shadow 0.3s, transform 0.3s;
-    }
-    .card:hover {
-      box-shadow: 0 8px 32px rgba(35,41,70,0.18);
-      transform: translateY(-4px) scale(1.015);
-    }
-    nav a {
-      color: #8ecae6;
-      background: none;
-      border: none;
-      margin: 0 16px;
-      padding: 0 0 4px 0;
-      font-weight: 600;
-      font-size: 1.08rem;
-      letter-spacing: 0.5px;
-      text-decoration: none;
-      border-bottom: 2px solid transparent;
-      transition: color 0.2s, border-bottom 0.2s;
-      position: relative;
-    }
-    nav a::after {
-      content: '';
-      display: block;
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 100%;
-      height: 2px;
-      background: linear-gradient(90deg, #8ecae6 60%, #232946 100%);
-      border-radius: 2px;
-      transform: scaleX(0);
-      transition: transform 0.3s;
-    }
-    nav a:hover {
-      color: #232946;
-      border-bottom: 2px solid #8ecae6;
-    }
-    nav a:hover::after {
-      transform: scaleX(1);
-    }
-    h2, h3 {
-      position: relative;
-      display: inline-block;
-      padding-bottom: 4px;
-    }
-    h2::after, h3::after {
-      content: '';
-      display: block;
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 100%;
-      height: 3px;
-      background: linear-gradient(90deg, #8ecae6 60%, #232946 100%);
-      border-radius: 2px;
-      transform: scaleX(0);
-      transition: transform 0.3s;
-    }
-    h2:hover::after, h3:hover::after {
-      transform: scaleX(1);
-    }
-    img {
-      transition: box-shadow 0.3s, transform 0.3s;
-    }
-    img:hover {
-      box-shadow: 0 8px 32px rgba(35,41,70,0.18);
-      transform: scale(1.03);
-    }
-    .container {
-      margin-bottom: 48px;
-    }
-    footer {
-      letter-spacing: 1px;
-      font-size: 1.05rem;
-      border-radius: 0 0 18px 18px;
-      box-shadow: 0 -4px 24px rgba(35,41,70,0.10);
-    }
+    /* Unified improved styles + table rules for presupuesto */
+    * { box-sizing: border-box; }
+    html,body { height: 100%; }
     body {
       font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
       margin: 0;
       padding: 0;
-      background: #fff;
-      color: #232946;
-      line-height: 1.7;
+      background: linear-gradient(135deg, #f0f0f0 0%, #e8e8e8 100%);
+      color: #1a1a1a;
+      line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
       min-height: 100vh;
     }
     header {
-      background: #232946;
-      color: #e0e6ed;
-      padding: 32px 20px 24px 20px;
+      background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+      color: #ffffff;
+      padding: 50px 20px 40px 20px;
       text-align: center;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.10);
-      border-bottom: 2px solid #8ecae6;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+      border-bottom: 3px solid #d4af37;
     }
-    header h1 {
-      margin: 0;
-      font-size: 2.2rem;
-      letter-spacing: 1px;
-      font-weight: 700;
-      text-shadow: 0 2px 8px #1a1a2e44;
-    }
-    nav {
-      margin-top: 18px;
-    }
-    nav a {
-      color: #e0e6ed;
-      margin: 0 18px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 1.08rem;
-      letter-spacing: 0.5px;
-      transition: color 0.2s;
-      border-bottom: 2px solid transparent;
-      padding-bottom: 2px;
-    }
-    nav a:hover {
-      color: #8ecae6;
-      border-bottom: 2px solid #8ecae6;
-    }
-    .container {
-      max-width: 900px;
-      margin: 32px auto;
-      padding: 32px 24px;
-      background: #fff;
-      border-radius: 18px;
-      box-shadow: 0 4px 32px rgba(35,41,70,0.08);
-      text-align: center;
-      border: 1.5px solid #e0e6ed;
-    }
-    h2 {
-      color: #232946;
-      margin-top: 0;
-      font-size: 1.5rem;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-      text-align: center;
-      border-bottom: 2px solid #8ecae6;
-      display: inline-block;
-      padding-bottom: 4px;
-      margin-bottom: 18px;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 20px 0;
-      background: #f4f7fa;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 2px 12px rgba(35,41,70,0.07);
-      transition: transform 0.35s cubic-bezier(.4,1.4,.6,1), box-shadow 0.3s;
-    }
-    table:hover {
-      transform: scale(1.06);
-      box-shadow: 0 8px 32px rgba(35,41,70,0.18);
-    }
-    th, td {
-      border: 1px solid #e0e6ed;
-      padding: 12px 10px;
-      text-align: left;
-      font-size: 1rem;
-    }
-    th {
-      background: #232946;
-      color: #e0e6ed;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-    }
-    tr:nth-child(even) {
-      background: #f9fafb;
-    }
-    .total {
-      font-weight: bold;
-      background: #8ecae6;
-      color: #fff;
-      font-size: 1.08rem;
-    }
-    img {
-      max-width: 90%;
-      border-radius: 10px;
-      margin: 18px 0 8px 0;
-      box-shadow: 0 2px 12px rgba(35,41,70,0.10);
-      border: 1px solid #e0e6ed;
-    }
-    footer {
-      text-align: center;
-      padding: 18px;
-      background: #232946;
-      color: #e0e6ed;
-      margin-top: 32px;
-      font-size: 1rem;
-      letter-spacing: 0.5px;
-      border-top: 2px solid #8ecae6;
-      box-shadow: 0 -2px 12px rgba(35,41,70,0.10);
-    }
+    header h1 { margin:0; font-size:2.8rem; letter-spacing:2.5px; font-weight:700; }
+    nav { margin-top: 20px; }
+    nav a { color:#e0e0e0; margin:0 18px; text-decoration:none; font-weight:600; font-size:1.02rem; position:relative; padding-bottom:4px; }
+    nav a::after { content:''; position:absolute; left:0; bottom:0; width:100%; height:2px; background:linear-gradient(90deg,#d4af37 60%,#232946 100%); transform:scaleX(0); transform-origin:left; transition:transform .3s ease; }
+    nav a:hover { color:#f5d547; } nav a:hover::after{ transform:scaleX(1); }
+
+    .container { max-width:980px; margin:56px auto; padding:36px; background:#ffffff; border-radius:12px; box-shadow:0 10px 40px rgba(0,0,0,0.08); }
+    h2{ color:#1a1a1a; margin:0 0 18px 0; font-size:1.9rem; font-weight:700; display:inline-block; padding-bottom:8px; position:relative; }
+    h2::after{ content:''; position:absolute; left:0; bottom:0; width:100%; height:3px; background:linear-gradient(90deg,#d4af37 60%,#232946 100%); transform:scaleX(0); transition:transform .3s; }
+    h2:hover::after{ transform:scaleX(1); }
+
+    table { width:100%; border-collapse:collapse; margin:20px 0; background:#ffffff; border-radius:8px; overflow:hidden; box-shadow:0 2px 10px rgba(0,0,0,0.06); transition:all .3s ease; }
+    table:hover{ box-shadow:0 8px 25px rgba(212,175,55,0.15); }
+    th,td{ border:1px solid #e0e0e0; padding:12px 10px; text-align:left; font-size:1rem; }
+    th{ background:linear-gradient(135deg,#1a1a1a 0%,#2d2d2d 100%); color:#fff; font-weight:600; }
+    tr:nth-child(even){ background:#fafafa; }
+    .total{ font-weight:700; background:linear-gradient(135deg,#d4af37 0%,#c9a442 100%); color:#fff; font-size:1.08rem; }
+
+    .card{ background:linear-gradient(135deg,#fafafa 0%,#fff 100%); padding:26px 24px; margin:22px 0; border-radius:10px; box-shadow:0 6px 24px rgba(0,0,0,0.06); border:1px solid #ececec; transition:transform .35s ease, box-shadow .35s ease; }
+    .card:hover{ transform:translateY(-8px) translateX(8px); box-shadow:0 18px 50px rgba(212,175,55,0.18); border-color:#d4af37; border-left: 4px solid #d4af37; }
+    .card strong, strong { color: #d4af37; font-weight: 700; }
+    p { transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease; border-left: 3px solid transparent; padding-left: 12px; }
+    p:hover { transform: translateX(8px); border-left-color: #d4af37; box-shadow: -4px 0 12px rgba(212,175,55,0.15); }
+
+    img{ max-width:100%; height:auto; display:block; margin:20px auto; border-radius:12px; box-shadow:0 8px 30px rgba(0,0,0,0.12); border:2px solid #efefef; transition:transform .35s ease, box-shadow .35s ease; }
+    img:hover{ transform:scale(1.04); box-shadow:0 18px 50px rgba(212,175,55,0.18); border-color:#d4af37; }
+
+    footer{ text-align:center; padding:28px 18px; background: linear-gradient(135deg,#1a1a1a 0%,#2d2d2d 100%); color:#e0e0e0; margin-top:48px; font-size:0.95rem; border-top:3px solid #d4af37; border-radius:0; box-shadow:0 -8px 25px rgba(0,0,0,0.12);} 
   </style>
 </head>
 <body>
@@ -212,13 +66,13 @@
       <a href="principal.html">Inicio</a>
       <a href="explicacion.html">Explicación</a>
       <a href="monitoreo.html">Monitoreo</a>
-      <a href="softwares.html">softwares</a>
+      <a href="Softwares.html">Softwares</a>
     </nav>
   </header>
 
   <div class="container">
     <h2>Componentes y costos estimados</h2>
-    <p>El siguiente presupuesto cubre la inversión en <strong>Hardware de Monitoreo</strong> necesaria para el servidor central (Raspberry Pi). El software utilizado (Prometheus, Grafana, Docker) es de código abierto, con licencia **0 €**.</p>
+    <p>El siguiente presupuesto cubre la inversión en <strong>Hardware de Monitoreo</strong> necesaria para el servidor central (Raspberry Pi). El software utilizado (Prometheus, Grafana, Docker) es de código abierto, con licencia <strong>0 €</strong>.</p>
 
     <table>
       <thead>
@@ -259,8 +113,8 @@
     <h2>Consideraciones adicionales</h2>
     <p>La viabilidad económica es alta dado el bajo coste inicial. El presupuesto cubre los elementos básicos para la implementación del servidor de monitoreo.</p>
     <ul>
-      <li>**Software:** Coste 0€ gracias al uso de herramientas open source.</li>
-      <li>**Duración del Proyecto:** Se estima una duración de 7 semanas, según la planificación Agile.</li>
+      <li>Software: Coste 0€ gracias al uso de herramientas open source.</li>
+      <li>Duración del Proyecto: Se estima una duración de 7 semanas, según la planificación Agile.</li>
     </ul>
 
     <img src="presupuestooooo.jpg" alt="Imagen ilustrativa del presupuesto y materiales">
