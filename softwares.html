@@ -7,208 +7,65 @@
   <title>Software y Arquitectura - Proyecto de Monitoreo</title>
   <meta name="description" content="Explicación detallada del software y la arquitectura del sistema de monitoreo de red para Chitech.">
   <style>
-    /* Estilos copiados de tu plantilla */
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
     body {
       font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
       margin: 0;
       padding: 0;
-      background: #f8f9fa;
-      color: #232946;
-      line-height: 1.7;
+      background: linear-gradient(135deg, #f0f0f0 0%, #e8e8e8 100%);
+      color: #1a1a1a;
+      line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
       min-height: 100vh;
     }
     header {
-      background: #232946;
-      color: #e0e6ed;
-      padding: 32px 20px 24px 20px;
+      background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+      color: #ffffff;
+      padding: 50px 20px 40px 20px;
       text-align: center;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.10);
-      border-bottom: 3px solid #8ecae6;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+      border-bottom: 3px solid #d4af37;
     }
-    header h1 {
-      margin: 0;
-      font-size: 2.2rem;
-      letter-spacing: 1px;
-      font-weight: 700;
-      text-shadow: 0 2px 8px #1a1a2e44;
-    }
-    nav {
-      margin-top: 18px;
-    }
-    nav a {
-      color: #e0e6ed;
-      margin: 0 18px;
-      padding: 0 0 4px 0;
-      font-weight: 600;
-      font-size: 1.08rem;
-      letter-spacing: 0.5px;
-      text-decoration: none;
-      border-bottom: 2px solid transparent;
-      transition: color 0.2s, border-bottom 0.2s;
-      position: relative;
-    }
-    nav a:hover {
-      color: #8ecae6;
-    }
-    nav a::after {
-      content: '';
-      display: block;
-      position: absolute;
-      left: 0;
-      bottom: -2px;
-      width: 100%;
-      height: 2px;
-      background: linear-gradient(90deg, #8ecae6 60%, #219ebc 100%);
-      border-radius: 2px;
-      transform-origin: left;
-      transform: scaleX(0);
-      transition: transform 0.3s ease-in-out;
-    }
-    nav a:hover::after {
-      transform: scaleX(1);
-    }
-    .container {
-      max-width: 900px;
-      margin: 48px auto;
-      padding: 32px 24px;
-      background: #fff;
-      border-radius: 18px;
-      box-shadow: 0 4px 32px rgba(35,41,70,0.08);
-      text-align: center;
-      border: 1.5px solid #e0e6ed;
-    }
-    h3{
-      color: #232946;
-      margin-top: 0;
-      font-size: 1.5rem;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-      text-align: center;
-      border-bottom: 2px solid #8ecae6;
-      display: inline-block;
-      padding-bottom: 4px;
-      margin-bottom: 18px;
-    }
-    h2 {
-      color: #232946;
-      margin-top: 0;
-      font-size: 1.5rem;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-      text-align: center;
-      border-bottom: 2px solid #8ecae6;
-      display: inline-block;
-      padding-bottom: 4px;
-      margin-bottom: 18px;
-    }
-    h2, h3 {
-      position: relative;
-      display: inline-block;
-      padding-bottom: 4px;
-    }
-    h2::after, h3::after {
-      content: '';
-      display: block;
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 100%;
-      height: 3px;
-      background: linear-gradient(90deg, #8ecae6 60%, #232946 100%);
-      border-radius: 2px;
-      transform: scaleX(0);
-      transition: transform 0.3s;
-    }
-    h2:hover::after, h3:hover::after {
-      transform: scaleX(1);
-    }
-    .card {
-      background: #f4f7fa;
-      padding: 24px 20px;
-      margin: 24px 0;
-      border-radius: 12px;
-      box-shadow: 0 2px 12px rgba(35,41,70,0.07);
-      text-align: left;
-      border: 1px solid #dbeafe;
-      transition: box-shadow 0.3s, transform 0.3s;
-    }
-    .card:hover {
-      box-shadow: 0 8px 32px rgba(35,41,70,0.18);
-      transform: translateY(-4px) scale(1.015);
-    }
-  .card h3 {
-    text-align: left;
-  }
-  .card h3.centered {
-    text-align: center;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-  }
-    .card ul, .card ol {
-      padding-left: 20px;
-      color: #232946;
-    }
-    .card p, .card li {
-        text-align: justify;
-    }
-    img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 10px;
-      margin: 18px 0 8px 0;
-      box-shadow: 0 2px 12px rgba(35,41,70,0.10);
-      border: 1px solid #e0e6ed;
-      transition: transform 0.3s;
-    }
-    img:hover {
-        transform: scale(1.03);
-    }
-    .logo-img {
-        max-width: 250px;
-        display: block;
-        margin: 18px auto;
-    }
-    footer {
-      text-align: center;
-      padding: 22px;
-      background: #232946;
-      color: #e0e6ed;
-      margin-top: 48px;
-      font-size: 1rem;
-      letter-spacing: 0.5px;
-      border-top: 3px solid #8ecae6;
-    }
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin-top: 12px;
-      align-items: start;
-    }
-    .service {
-      background: #f4f8ff;
-      padding: 12px 10px;
-      border-radius: 10px;
-      border: 1px solid #e6f1ff;
-      text-align: center;
-      min-height: 140px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      transition: transform 0.18s, box-shadow 0.18s;
-    }
+    header h1 { margin: 0; font-size: 2.8rem; letter-spacing: 2.5px; font-weight: 700; }
+    nav { margin-top: 20px; }
+    nav a { color: #e0e0e0; margin: 0 18px; text-decoration: none; font-weight: 600; font-size: 1.02rem; position: relative; padding-bottom: 4px; display: inline-block; }
+    nav a::after { content: ''; position: absolute; left: 0; bottom: 0; width: 100%; height: 2px; background: linear-gradient(90deg, #d4af37 60%, #232946 100%); transform: scaleX(0); transform-origin: left; transition: transform .3s ease; }
+    nav a:hover { color: #f5d547; }
+    nav a:hover::after { transform: scaleX(1); }
+    .container { max-width: 980px; margin: 56px auto; padding: 36px; background: #ffffff; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); border: 1.5px solid #e9eef6; }
+    h2, h3 { color: #1a1a1a; margin: 0 0 18px 0; font-size: 1.9rem; font-weight: 700; display: inline-block; padding-bottom: 8px; position: relative; }
+    h2::after, h3::after { content: ''; position: absolute; left: 0; bottom: 0; width: 100%; height: 3px; background: linear-gradient(90deg, #d4af37 60%, #232946 100%); transform: scaleX(0); transition: transform .3s ease; }
+    h2:hover::after, h3:hover::after { transform: scaleX(1); }
+    .card { background: linear-gradient(135deg,#fafafa 0%,#ffffff 100%); padding: 26px 24px; margin: 22px 0; border-radius: 10px; box-shadow: 0 6px 24px rgba(0,0,0,0.06); color: #2c2c2c; border: 1px solid #ececec; position: relative; overflow: hidden; transition: transform 0.35s cubic-bezier(.2,.8,.2,1), box-shadow 0.35s; }
+    .card::before{ content: ''; position: absolute; top:0; left:-120%; width:120%; height:100%; background: linear-gradient(90deg, transparent, rgba(212,175,55,0.08), transparent); transition: left 0.6s ease; }
+    .card:hover{ transform: translateY(-8px) translateX(8px); box-shadow: 0 18px 50px rgba(212,175,55,0.18); border-color: #d4af37; border-left: 4px solid #d4af37; }
+    .card:hover::before{ left: 120%; }
+    .card strong { color: #d4af37; font-weight: 700; }
+    .card ul, .card ol{ padding-left: 22px; color:#2c2c2c; }
+    .card p, .card li{ color:#333; }
+    .card h3 { margin: 0 0 10px 0; }
+    .card h3.centered { text-align: center; display: block; margin: 0 auto 8px auto; }
+
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 12px; align-items: start; }
+    .service { background: #fff8ea; padding: 14px 12px; border-radius: 10px; border: 1px solid #faeed1; text-align: center; min-height: 140px; display: flex; flex-direction: column; justify-content: flex-start; transition: transform .18s, box-shadow .18s; }
     .service:hover { transform: translateY(-6px); box-shadow: 0 12px 36px rgba(35,41,70,0.08); }
     .service-icon { font-size: 32px; margin-bottom: 8px; }
     .service h3 { margin: 6px 0 8px 0; font-size: 1.05rem; }
     .service p { margin: 0; font-size: 0.95rem; color: #334; }
     @media (max-width: 820px) { .services-grid { grid-template-columns: 1fr; } .service { min-height: auto; } }
+    img { max-width: 100%; height: auto; border-radius: 12px; margin: 18px auto; display: block; box-shadow: 0 8px 30px rgba(0,0,0,0.12); border: 1px solid #e6eef8; transition: transform .35s ease, box-shadow .35s ease; }
+    img:hover { transform: scale(1.04); box-shadow: 0 18px 50px rgba(212,175,55,0.18); }
+    .logo-img { max-width: 250px; display: block; margin: 18px auto; }
+    footer { text-align: center; padding: 28px 18px; background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); color: #e0e0e0; margin-top: 48px; font-size: 0.95rem; letter-spacing: 0.5px; border-top: 3px solid #d4af37; border-radius: 0; box-shadow: 0 -8px 25px rgba(0,0,0,0.12); }
+    .center-img { display: flex; align-items: center; justify-content: center; }
   </style>
 </head>
 <body>
 
   <header>
-    <h1>Explicación de softwares</h1>
+    <h1>Explicación de Softwares</h1>
     <nav>
       <a href="principal.html">Inicio</a>
       <a href="explicacion.html">Explicación</a>
