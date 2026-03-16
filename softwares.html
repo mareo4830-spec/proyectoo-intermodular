@@ -1,143 +1,52 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Software y Arquitectura - Proyecto de Monitoreo</title>
-  <meta name="description" content="Explicación detallada del software y la arquitectura del sistema de monitoreo de red para Chitech.">
-  <style>
-    * { box-sizing: border-box; }
-    html, body { height: 100%; }
-    body {
-      font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(135deg, #f0f0f0 0%, #e8e8e8 100%);
-      color: #1a1a1a;
-      line-height: 1.8;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      min-height: 100vh;
-    }
-    header {
-      background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-      color: #ffffff;
-      padding: 50px 20px 40px 20px;
-      text-align: center;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.25);
-      border-bottom: 3px solid #d4af37;
-    }
-    header h1 { margin: 0; font-size: 2.8rem; letter-spacing: 2.5px; font-weight: 700; }
-    nav { margin-top: 20px; }
-    nav a { color: #e0e0e0; margin: 0 18px; text-decoration: none; font-weight: 600; font-size: 1.02rem; position: relative; padding-bottom: 4px; display: inline-block; }
-    nav a::after { content: ''; position: absolute; left: 0; bottom: 0; width: 100%; height: 2px; background: linear-gradient(90deg, #d4af37 60%, #232946 100%); transform: scaleX(0); transform-origin: left; transition: transform .3s ease; }
-    nav a:hover { color: #f5d547; }
-    nav a:hover::after { transform: scaleX(1); }
-    .container { max-width: 980px; margin: 56px auto; padding: 36px; background: #ffffff; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); border: 1.5px solid #e9eef6; }
-    h2, h3 { color: #1a1a1a; margin: 0 0 18px 0; font-size: 1.9rem; font-weight: 700; display: inline-block; padding-bottom: 8px; position: relative; }
-    h2::after, h3::after { content: ''; position: absolute; left: 0; bottom: 0; width: 100%; height: 3px; background: linear-gradient(90deg, #d4af37 60%, #232946 100%); transform: scaleX(0); transition: transform .3s ease; }
-    h2:hover::after, h3:hover::after { transform: scaleX(1); }
-    .card { background: linear-gradient(135deg,#fafafa 0%,#ffffff 100%); padding: 26px 24px; margin: 22px 0; border-radius: 10px; box-shadow: 0 6px 24px rgba(0,0,0,0.06); color: #2c2c2c; border: 1px solid #ececec; position: relative; overflow: hidden; transition: transform 0.35s cubic-bezier(.2,.8,.2,1), box-shadow 0.35s; }
-    .card::before{ content: ''; position: absolute; top:0; left:-120%; width:120%; height:100%; background: linear-gradient(90deg, transparent, rgba(212,175,55,0.08), transparent); transition: left 0.6s ease; }
-    .card:hover{ transform: translateY(-8px) translateX(8px); box-shadow: 0 18px 50px rgba(212,175,55,0.18); border-color: #d4af37; border-left: 4px solid #d4af37; }
-    .card:hover::before{ left: 120%; }
-    .card strong { color: #d4af37; font-weight: 700; }
-    .card ul, .card ol{ padding-left: 22px; color:#2c2c2c; }
-    .card p, .card li{ color:#333; }
-    .card h3 { margin: 0 0 10px 0; }
-    .card h3.centered { text-align: center; display: block; margin: 0 auto 8px auto; }
-
-    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 12px; align-items: start; }
-    .service { background: #fff8ea; padding: 14px 12px; border-radius: 10px; border: 1px solid #faeed1; text-align: center; min-height: 140px; display: flex; flex-direction: column; justify-content: flex-start; transition: transform .18s, box-shadow .18s; }
-    .service:hover { transform: translateY(-6px); box-shadow: 0 12px 36px rgba(35,41,70,0.08); }
-    .service-icon { font-size: 32px; margin-bottom: 8px; }
-    .service h3 { margin: 6px 0 8px 0; font-size: 1.05rem; }
-    .service p { margin: 0; font-size: 0.95rem; color: #334; }
-    @media (max-width: 820px) { .services-grid { grid-template-columns: 1fr; } .service { min-height: auto; } }
-    img { max-width: 100%; height: auto; border-radius: 12px; margin: 18px auto; display: block; box-shadow: 0 8px 30px rgba(0,0,0,0.12); border: 1px solid #e6eef8; transition: transform .35s ease, box-shadow .35s ease; }
-    img:hover { transform: scale(1.04); box-shadow: 0 18px 50px rgba(212,175,55,0.18); }
-    .logo-img { max-width: 250px; display: block; margin: 18px auto; }
-    footer { text-align: center; padding: 28px 18px; background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); color: #e0e0e0; margin-top: 48px; font-size: 0.95rem; letter-spacing: 0.5px; border-top: 3px solid #d4af37; border-radius: 0; box-shadow: 0 -8px 25px rgba(0,0,0,0.12); }
-    .center-img { display: flex; align-items: center; justify-content: center; }
-  </style>
+  <title>Softwares - Monitoreo Chitech</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
   <header>
-    <h1>Explicación de Softwares</h1>
+    <img src="logo.png" alt="Logo Chitech" class="logo-header">
+    <h1>El Stack Tecnológico</h1>
     <nav>
       <a href="principal.html">Inicio</a>
       <a href="explicacion.html">Explicación</a>
       <a href="presupuesto.html">Presupuesto</a>
       <a href="monitoreo.html">Monitoreo</a>
+      <a href="softwares.html" style="color: #00b4d8;">Softwares</a>
     </nav>
   </header>
 
   <div class="container">
-    <h2>Software y Arquitectura de la Solución</h2>
-    <p style="text-align: center; max-width: 80%; margin: 0 auto 32px auto;">
-      La solución se basa en una arquitectura de contenedores Docker utilizando el stack <strong>Prometheus + Grafana</strong>. Esto proporciona una potencia y flexibilidad excepcionales para la monitorización en tiempo real.
-    </p>
-
-      <section class="center-services" aria-label="Componentes de monitoreo">
-        <div class="services-card">
-          <h2>Arquitectura de Monitoreo</h2>
-          <p style="margin-top:6px; margin-bottom:18px; color:#444; max-width:760px; margin-left:auto; margin-right:auto;">Componentes principales del sistema de monitoreo, implementados como contenedores.</p>
-          <div class="services-grid">
-            <div class="service" role="article" aria-labelledby="prom-id">
-              <div class="service-icon" aria-hidden="true">📦</div>
-              <h3 id="prom-id">Prometheus</h3>
-              <p><strong>El Motor de Recolección</strong><br>Recopila métricas, guarda series temporales y permite consultas flexibles.</p>
-            </div>
-            <div class="service" role="article" aria-labelledby="graf-id">
-              <div class="service-icon" aria-hidden="true">📊</div>
-              <h3 id="graf-id">Grafana</h3>
-              <p><strong>El Panel de Control Visual</strong><br>Construye paneles, visualiza métricas y crea alertas.</p>
-            </div>
-            <div class="service" role="article" aria-labelledby="docker-id">
-              <div class="service-icon" aria-hidden="true">🐳</div>
-              <h3 id="docker-id">Docker Compose</h3>
-              <p><strong>Orquestación de Contenedores</strong><br>Define y ejecuta el *stack* completo de servicios con un solo comando.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
+    <h2>Un ecosistema modular y ligero</h2>
     <div class="card">
-      <h3 class="centered">Exporters de Sistema y Red</h3>
-      <p>
-        Los *exporters* son agentes ligeros que actúan como "chivatos", exponiendo métricas de un servicio o hardware para que Prometheus las recoja.
-      </p>
+      <p>Al encontrarnos con hardware de arquitectura de 32 bits, diseñamos un ecosistema ágil, descartando soluciones monolíticas que asfixiarían al procesador.</p>
+      
+      <h3>1. Capa de Presentación unificada</h3>
       <ul>
-        <li>
-          <strong>Node Exporter:</strong> Recoge métricas internas del hardware donde está instalado (CPU, RAM, uso de disco, temperatura). En este proyecto, monitoriza la salud de la **Raspberry Pi 4**.
-        </li>
-        <li>
-          <strong>Blackbox Exporter:</strong> Se utiliza para la monitorización externa. Se encarga de hacer **pings** a los *hosts* externos (Google, GitHub) para medir la **latencia** y la **pérdida de paquetes**, detectando la caída o degradación de la conexión de Chitech.
-        </li>
-        <li>
-          <strong>SNMP Exporter:</strong> Es clave para el monitoreo de **tráfico individual**. Se configura para interrogar el *router* o *switch* de Chitech y obtener métricas de **ancho de banda (bytes In/Out)** por cada puerto. Esto permite ver el consumo de tráfico de cada dispositivo conectado.
-        </li>
+        <li><strong>Homer:</strong> Dashboard web estático. Funciona como punto de entrada único (portal) hacia todas las herramientas. Su arquitectura sin base de datos garantiza carga instantánea.</li>
+      </ul>
+
+      <h3>2. Capa de Análisis y Telemetría</h3>
+      <ul>
+        <li><strong>Netdata:</strong> Motor de recolección en tiempo real. Proporciona gráficas al milisegundo de la placa base, procesador y memoria.</li>
+        <li><strong>Darkstat:</strong> Nuestro <em>packet sniffer</em>. Se integra en la tarjeta de red para leer cabeceras de datos de forma pasiva y mostrar el consumo (In/Out) por cada ordenador.</li>
+        <li><strong>Uptime Kuma:</strong> El vigía incansable. Lanza peticiones continuas a los servicios y levanta paneles en rojo si algo deja de funcionar.</li>
+      </ul>
+
+      <h3>3. Capa de Seguridad (Escudo y Espada)</h3>
+      <ul>
+        <li><strong>Pi-hole (Seguridad Pasiva):</strong> Sumidero DNS. Desvía peticiones de publicidad y dominios maliciosos a una IP nula, ahorrando ancho de banda a todos los PCs del aula.</li>
+        <li><strong>Fail2Ban (Seguridad Activa):</strong> Sistema IPS que monitoriza los <em>logs</em> y banea mediante el firewall a cualquier bot que intente entrar por fuerza bruta al servidor SSH.</li>
       </ul>
     </div>
-
-    <div class="card">
-      <h3 class="centered">Flujo de Trabajo del Monitoreo</h3>
-        <ol>
-            <li><strong>Exposición:</strong> Los agentes (*exporters*) exponen las métricas de rendimiento en una URL.</li>
-            <li><strong>Recolección (Scraping):</strong> Prometheus consulta periódicamente a cada *exporter* para recoger los datos.</li>
-            <li><strong>Almacenamiento:</strong> Prometheus guarda las métricas en su base de datos.</li>
-            <li><strong>Visualización y Alertas:</strong> El personal accede a Grafana, que consulta los datos y los representa en gráficos fáciles de entender.</li>
-        </ol>
-  <img src="diagrama.png" alt="Diagrama de flujo de la arquitectura: Exporter -> Prometheus -> Grafana -> Usuario" class="center-img">
-    </div>
-
   </div>
 
   <footer>
-    © 2025 Proyecto Final — Chitech · Huelva | Alumno: Mario García Calero | 2º SMR
+    © 2025 Proyecto Intermodular — Chitech · Huelva | Alumno: Mario García Calero | 2ºSMR
   </footer>
-
 </body>
 </html>

@@ -1,126 +1,73 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Presupuesto Inicial — Sistema de Monitoreo de Redes</title>
-  <meta name="description" content="Presupuesto inicial del proyecto de monitoreo de red con Raspberry Pi.">
-  <style>
-    /* Unified improved styles + table rules for presupuesto */
-    * { box-sizing: border-box; }
-    html,body { height: 100%; }
-    body {
-      font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(135deg, #f0f0f0 0%, #e8e8e8 100%);
-      color: #1a1a1a;
-      line-height: 1.8;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      min-height: 100vh;
-    }
-    header {
-      background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-      color: #ffffff;
-      padding: 50px 20px 40px 20px;
-      text-align: center;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.25);
-      border-bottom: 3px solid #d4af37;
-    }
-    header h1 { margin:0; font-size:2.8rem; letter-spacing:2.5px; font-weight:700; }
-    nav { margin-top: 20px; }
-    nav a { color:#e0e0e0; margin:0 18px; text-decoration:none; font-weight:600; font-size:1.02rem; position:relative; padding-bottom:4px; }
-    nav a::after { content:''; position:absolute; left:0; bottom:0; width:100%; height:2px; background:linear-gradient(90deg,#d4af37 60%,#232946 100%); transform:scaleX(0); transform-origin:left; transition:transform .3s ease; }
-    nav a:hover { color:#f5d547; } nav a:hover::after{ transform:scaleX(1); }
-
-    .container { max-width:980px; margin:56px auto; padding:36px; background:#ffffff; border-radius:12px; box-shadow:0 10px 40px rgba(0,0,0,0.08); }
-    h2{ color:#1a1a1a; margin:0 0 18px 0; font-size:1.9rem; font-weight:700; display:inline-block; padding-bottom:8px; position:relative; }
-    h2::after{ content:''; position:absolute; left:0; bottom:0; width:100%; height:3px; background:linear-gradient(90deg,#d4af37 60%,#232946 100%); transform:scaleX(0); transition:transform .3s; }
-    h2:hover::after{ transform:scaleX(1); }
-
-    table { width:100%; border-collapse:collapse; margin:20px 0; background:#ffffff; border-radius:8px; overflow:hidden; box-shadow:0 2px 10px rgba(0,0,0,0.06); transition:all .3s ease; }
-    table:hover{ box-shadow:0 8px 25px rgba(212,175,55,0.15); }
-    th,td{ border:1px solid #e0e0e0; padding:12px 10px; text-align:left; font-size:1rem; }
-    th{ background:linear-gradient(135deg,#1a1a1a 0%,#2d2d2d 100%); color:#fff; font-weight:600; }
-    tr:nth-child(even){ background:#fafafa; }
-    .total{ font-weight:700; background:linear-gradient(135deg,#d4af37 0%,#c9a442 100%); color:#fff; font-size:1.08rem; }
-
-    .card{ background:linear-gradient(135deg,#fafafa 0%,#fff 100%); padding:26px 24px; margin:22px 0; border-radius:10px; box-shadow:0 6px 24px rgba(0,0,0,0.06); border:1px solid #ececec; transition:transform .35s ease, box-shadow .35s ease; }
-    .card:hover{ transform:translateY(-8px) translateX(8px); box-shadow:0 18px 50px rgba(212,175,55,0.18); border-color:#d4af37; border-left: 4px solid #d4af37; }
-    .card strong, strong { color: #d4af37; font-weight: 700; }
-    p { transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease; border-left: 3px solid transparent; padding-left: 12px; }
-    p:hover { transform: translateX(8px); border-left-color: #d4af37; box-shadow: -4px 0 12px rgba(212,175,55,0.15); }
-
-    img{ max-width:100%; height:auto; display:block; margin:20px auto; border-radius:12px; box-shadow:0 8px 30px rgba(0,0,0,0.12); border:2px solid #efefef; transition:transform .35s ease, box-shadow .35s ease; }
-    img:hover{ transform:scale(1.04); box-shadow:0 18px 50px rgba(212,175,55,0.18); border-color:#d4af37; }
-
-    footer{ text-align:center; padding:28px 18px; background: linear-gradient(135deg,#1a1a1a 0%,#2d2d2d 100%); color:#e0e0e0; margin-top:48px; font-size:0.95rem; border-top:3px solid #d4af37; border-radius:0; box-shadow:0 -8px 25px rgba(0,0,0,0.12);} 
-  </style>
+  <title>Presupuesto - Monitoreo Chitech</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
-    <h1>Presupuesto Inicial</h1>
+    <img src="logo.png" alt="Logo Chitech" class="logo-header">
+    <h1>Estudio de Viabilidad</h1>
     <nav>
       <a href="principal.html">Inicio</a>
       <a href="explicacion.html">Explicación</a>
+      <a href="presupuesto.html" style="color: #00b4d8;">Presupuesto</a>
       <a href="monitoreo.html">Monitoreo</a>
-      <a href="Softwares.html">Softwares</a>
+      <a href="softwares.html">Softwares</a>
     </nav>
   </header>
 
   <div class="container">
-    <h2>Componentes y costos estimados</h2>
-    <p>El siguiente presupuesto cubre la inversión en <strong>Hardware de Monitoreo</strong> necesaria para el servidor central (Raspberry Pi). El software utilizado (Prometheus, Grafana, Docker) es de código abierto, con licencia <strong>0 €</strong>.</p>
+    <h2>Costes de Hardware</h2>
+    <p>La propuesta destaca por tener un coste inicial residual. Todo el software implementado es Open Source (licencia de uso 0€), por lo que el presupuesto se destina íntegramente al servidor físico ARM.</p>
 
     <table>
       <thead>
         <tr>
           <th>Componente</th>
-          <th>Descripción</th>
+          <th>Descripción Técnica</th>
           <th>Costo (€)</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>Raspberry Pi 4 (4GB RAM)</td>
-          <td>Unidad central de gestión del monitoreo</td>
-          <td>70</td>
+          <td>Raspberry Pi 4 Model B (4GB RAM)</td>
+          <td>Cerebro del sistema y motor Docker</td>
+          <td>70 €</td>
         </tr>
         <tr>
-          <td>Fuente de alimentación oficial</td>
-          <td>Alimentación estable para el servidor 24/7</td>
-          <td>20</td>
+          <td>Fuente de alimentación USB-C 15W</td>
+          <td>Alimentación oficial y estable 24/7</td>
+          <td>20 €</td>
         </tr>
         <tr>
-          <td>Tarjeta microSD (32GB)</td>
-          <td>Almacenamiento del sistema operativo y base de datos Prometheus</td>
-          <td>12</td>
+          <td>Tarjeta microSDXC (32GB) Class 10</td>
+          <td>Almacenamiento del OS y configuraciones YAML</td>
+          <td>12 €</td>
         </tr>
         <tr>
-          <td>Material de cableado y accesorios</td>
-          <td>Conectividad y montaje</td>
-          <td>15</td>
+          <td>Cableado UTP y disipadores pasivos</td>
+          <td>Conectividad LAN y gestión térmica</td>
+          <td>15 €</td>
         </tr>
         <tr class="total">
-          <td colspan="2">Total estimado (Hardware)</td>
+          <td colspan="2">Costo Total de Despliegue</td>
           <td>117 €</td>
         </tr>
       </tbody>
     </table>
 
-    <h2>Consideraciones adicionales</h2>
-    <p>La viabilidad económica es alta dado el bajo coste inicial. El presupuesto cubre los elementos básicos para la implementación del servidor de monitoreo.</p>
-    <ul>
-      <li>Software: Coste 0€ gracias al uso de herramientas open source.</li>
-      <li>Duración del Proyecto: Se estima una duración de 7 semanas, según la planificación Agile.</li>
-    </ul>
-
-    <img src="presupuestooooo.jpg" alt="Imagen ilustrativa del presupuesto y materiales">
+    <h2>Retorno de Inversión (ROI)</h2>
+    <div class="card">
+      <p>Comparado con licencias corporativas que rondan los 1.500€ anuales más el hardware, esta solución se amortiza en la primera semana de funcionamiento, asegurando la continuidad del negocio de Chitech sin impacto en su tesorería.</p>
+    </div>
   </div>
 
   <footer>
     © 2025 Proyecto Intermodular — Chitech · Huelva | Alumno: Mario García Calero | 2ºSMR
+  </footer>
 </body>
 </html>

@@ -1,147 +1,38 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Sistema de Monitoreo de Redes y Servicios</title>
-  <meta name="description" content="Página principal del Proyecto Final: Monitoreo de Infraestructura de Red para Chitech.">
-  <style>
-    /* Unified improved styles: spacing, shadows, transitions, centered images, dorado accents */
-    * { box-sizing: border-box; }
-    html,body { height: 100%; }
-    body {
-      font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(135deg, #f0f0f0 0%, #e8e8e8 100%);
-      color: #1a1a1a;
-      line-height: 1.8;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      min-height: 100vh;
-    }
-    header {
-      background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-      color: #ffffff;
-      padding: 50px 20px 40px 20px;
-      text-align: center;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.25);
-      border-bottom: 3px solid #d4af37;
-    }
-    header h1 {
-      margin: 0;
-      font-size: 2.8rem;
-      letter-spacing: 2.5px;
-      font-weight: 700;
-      text-shadow: 0 4px 15px rgba(0,0,0,0.4);
-      color: #ffffff;
-    }
-    nav { margin-top: 20px; }
-    nav a {
-      color: #e0e0e0;
-      margin: 0 18px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 1.02rem;
-      letter-spacing: 0.8px;
-      transition: color 0.25s ease;
-      border-bottom: 2px solid transparent;
-      padding-bottom: 4px;
-      position: relative;
-      display: inline-block;
-    }
-    nav a::after {
-      content: '';
-      position: absolute;
-      left: 0; bottom: 0; width: 100%; height: 2px;
-      background: linear-gradient(90deg, #d4af37 60%, #232946 100%);
-      border-radius: 2px;
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.3s ease;
-    }
-    nav a:hover { color: #f5d547; }
-    nav a:hover::after { transform: scaleX(1); }
-
-    .container {
-      max-width: 980px;
-      margin: 56px auto;
-      padding: 36px;
-      background: #ffffff;
-      border-radius: 12px;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.08);
-      text-align: left;
-    }
-    h2, h3 {
-      color: #1a1a1a;
-      margin: 0 0 18px 0;
-      font-size: 1.9rem;
-      font-weight: 700;
-      letter-spacing: 0.8px;
-      display: inline-block;
-      padding-bottom: 8px;
-      position: relative;
-    }
-    h2::after, h3::after {
-      content: '';
-      position: absolute; left:0; bottom: 0; width:100%; height: 3px;
-      background: linear-gradient(90deg, #d4af37 60%, #232946 100%);
-      border-radius: 2px; transform: scaleX(0); transition: transform 0.3s ease;
-    }
-    h2:hover::after, h3:hover::after { transform: scaleX(1); }
-
-    .card {
-      background: linear-gradient(135deg,#fafafa 0%,#ffffff 100%);
-      padding: 26px 24px;
-      margin: 22px 0;
-      border-radius: 10px;
-      box-shadow: 0 6px 24px rgba(0,0,0,0.06);
-      color: #2c2c2c;
-      border: 1px solid #ececec;
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.35s cubic-bezier(.2,.8,.2,1), box-shadow 0.35s;
-    }
-    .card::before{
-      content: ''; position: absolute; top:0; left:-120%; width:120%; height:100%;
-      background: linear-gradient(90deg, transparent, rgba(212,175,55,0.08), transparent);
-      transition: left 0.6s ease;
-    }
-    .card:hover{ transform: translateY(-8px) translateX(8px); box-shadow: 0 18px 50px rgba(212,175,55,0.18); border-color: #d4af37; border-left: 4px solid #d4af37; }
-    .card:hover::before{ left: 120%; }
-    .card strong{ color:#d4af37; font-weight:700; }
-
-    .card ul, .card ol{ padding-left: 22px; color:#2c2c2c; }
-    .card p, .card li{ color:#333; }
-
-    img{ max-width:100%; height:auto; display:block; margin:20px auto; border-radius:12px; box-shadow:0 8px 30px rgba(0,0,0,0.12); border:2px solid #efefef; transition: transform 0.35s ease, box-shadow 0.35s ease; }
-    img:hover{ transform: scale(1.04); box-shadow:0 18px 50px rgba(212,175,55,0.18); border-color:#d4af37; }
-
-    footer{ text-align:center; padding:28px 18px; background: linear-gradient(135deg,#1a1a1a 0%,#2d2d2d 100%); color:#e0e0e0; margin-top:48px; font-size:0.95rem; letter-spacing:0.5px; border-top:3px solid #d4af37; border-radius:0; box-shadow:0 -8px 25px rgba(0,0,0,0.12);} 
-  </style>
-</head>
+  <title>Inicio - Monitoreo Chitech</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css"> </head>
 <body>
   <header>
-    <h1>Sistema de Monitoreo de Redes y Servicios</h1>
+    <img src="logo.png" alt="Logo Chitech" class="logo-header">
+    <h1>Sistema de Monitoreo Inteligente</h1>
     <nav>
+      <a href="principal.html" style="color: #00b4d8;">Inicio</a>
       <a href="explicacion.html">Explicación</a>
       <a href="presupuesto.html">Presupuesto</a>
       <a href="monitoreo.html">Monitoreo</a>
-      <a href="Softwares.html">Softwares</a>
+      <a href="softwares.html">Softwares</a>
     </nav>
   </header>
 
   <div class="container">
-    <h2>Bienvenido</h2>
+    <h2>¿Por qué elegir nuestra solución?</h2>
     <div class="card">
-      <p>Esta es la página principal del <strong>Proyecto Final</strong> para la Supervisión de Infraestructura de Red de la empresa <strong>Chitech Onuba S.L.</strong>.</p>
-      <p>El sistema se basa en una Raspberry Pi 4 y Docker para ofrecer una supervisión de red en tiempo real, latencia, ancho de banda y rendimiento del servidor.</p>
-      <img src="portada.png" alt="Imagen de portada del proyecto (ejemplo)">
+      <p>Para <strong>Chitech Onuba S.L.</strong>, la conectividad no es un lujo, es la base de su negocio. Esta propuesta no busca vender servidores caros, sino ofrecer una <strong>solución de monitorización y seguridad inteligente, ultra-ligera y de bajo coste</strong>.</p>
+      <p>Utilizando una Raspberry Pi 4 como cerebro, hemos diseñado un escudo perimetral y un radar de red que funciona 24/7 sin encarecer la factura de la luz ni requerir costosas licencias anuales.</p>
     </div>
+
+    <h2>Los 3 Pilares del Proyecto</h2>
     <div class="card">
-     <h3>Galería</h3>
-      <img src="principal,monitoreo.png" alt="Panel de monitoreo">
+     <ul>
+       <li><strong>Eficiencia Extrema:</strong> Al prescindir de bases de datos pesadas y usar herramientas nativas, el sistema vuela incluso en hardware de recursos limitados.</li>
+       <li><strong>Seguridad Proactiva:</strong> No solo miramos la red, la protegemos. Con Fail2Ban parando ataques de fuerza bruta al instante y Pi-hole bloqueando publicidad y malware desde la raíz.</li>
+       <li><strong>Gestión Centralizada:</strong> Un panel de control único (Homer) adaptado a cualquier dispositivo, donde de un vistazo sabes si la red respira o se ahoga.</li>
+     </ul>
     </div>
   </div>
 
